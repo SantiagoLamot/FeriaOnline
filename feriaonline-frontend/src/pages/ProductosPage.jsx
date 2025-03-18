@@ -1,5 +1,5 @@
-import { Card } from "../components/Card"
-import { Ordenar } from "../components/Ordenar"
+import { Card } from "../components/Inicio/Card"
+import { Ordenar } from "../components/inicio/Ordenar"
 
 export const ProductosPage = () => {
     return (

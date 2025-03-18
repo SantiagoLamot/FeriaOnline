@@ -1,14 +1,13 @@
 import { Route, Routes } from "react-router-dom"
-import { NavBar } from "./components/NavBar"
+import { NavBar } from "./components/generales/NavBar"
+import { ProductosPage } from "./pages/ProductosPage"
 
 export const FeriaOnline = () => {
   return (
     <>
     <NavBar></NavBar>
     <Routes>
-        <Route>
-
-        </Route>
+        <Route path="/" element={<ProductosPage/>}/>
     </Routes>
     </>
   )
