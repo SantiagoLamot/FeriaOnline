@@ -1,5 +1,5 @@
 export const VenderPage = () => {
     return (
-        <div>Pagina Vender</div>
+        <div className="container mt-4 text-center" >Pagina Vender</div>
     )
 }

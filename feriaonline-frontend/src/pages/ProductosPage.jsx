@@ -7,7 +7,7 @@ export const ProductosPage = () => {
             <h1>Productos</h1>
             <hr />
             <Ordenar></Ordenar>
-            <div className="row">
+            <div className="row d-flex justify-content-center">
                 <Card/>
                 <Card/>
                 <Card/>

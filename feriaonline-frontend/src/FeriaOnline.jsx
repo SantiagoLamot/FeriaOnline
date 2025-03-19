@@ -7,6 +7,8 @@ import { MisPublicacionesPage } from "./pages/PerfilPages/MisPublicacionesPage"
 import { MisVentasPage } from "./pages/PerfilPages/MisVentasPage"
 import { ProductosPage } from "./pages/ProductosPage"
 import { VenderPage } from "./pages/VenderPage"
+import { LoginPage } from "./pages/loginRegistroPages/LoginPage"
+import { RegistroPage } from "./pages/loginRegistroPages/RegistroPage"
 
 export const FeriaOnline = () => {
   return (
@@ -23,6 +25,8 @@ export const FeriaOnline = () => {
             <Route path="misVentas" element={<MisVentasPage />} />
             <Route path="" element={<Navigate to="descripcion" />} />
         </Route>
+        <Route path="/login" element={<LoginPage/>}></Route>
+        <Route path="/registro" element={<RegistroPage/>}></Route>
         <Route path="/*" element={<Navigate to='/'></Navigate>}></Route>
       </Routes>
     </>
