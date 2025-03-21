@@ -8,6 +8,7 @@ export const PerfilPage = () => {
                     <div className="d-flex justify-content-center w-100">
 
                     <NavLink to="/perfil/descripcion" className="btn btn-outline-secondary me-2">Mi Perfil</NavLink>
+                    <NavLink to="/perfil/editarPerfil" className="btn btn-outline-secondary me-2">Editar perfil</NavLink>
                     <NavLink to="/perfil/misPublicaciones" className="btn btn-outline-secondary me-2">Mis Publicaciones</NavLink>
                     <NavLink to="/perfil/misCompras" className="btn btn-outline-secondary me-2">Mis Compras</NavLink>
                     <NavLink to="/perfil/misVentas" className="btn btn-outline-secondary me-2">Mis Ventas</NavLink>

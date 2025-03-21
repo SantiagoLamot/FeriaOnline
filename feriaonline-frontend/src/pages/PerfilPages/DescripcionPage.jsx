@@ -1,5 +1,9 @@
+
+
 export const DescripcionPage = () => {
     return (
-        <div>Pagina principal de mi Perfil</div>
+        <>
+            <h1>Perfil de la persona</h1>
+        </>
     )
 }
