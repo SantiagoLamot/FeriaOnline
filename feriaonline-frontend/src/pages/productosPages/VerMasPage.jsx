@@ -9,7 +9,7 @@ export const VerMasPage = () => {
         <hr />
         <ProductoVerMas></ProductoVerMas>
         <br />
-        {/* En un futuro modificar y mostrar boton comprar solo cuando hay una sesion iniciada) */}
+        {/* En un futuro modificar y mostrar boton comprar solo cuando hay una sesion) */}
         <button className='btn btn-primary'>Comprar</button>
     </div>
 
