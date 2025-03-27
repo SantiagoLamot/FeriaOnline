@@ -10,6 +10,7 @@ import { VenderPage } from "./pages/VenderPage"
 import { LoginPage } from "./pages/loginRegistroPages/LoginPage"
 import { RegistroPage } from "./pages/loginRegistroPages/RegistroPage"
 import { EditarPerfil } from "./pages/PerfilPages/EditarPerfil"
+import { VerMasPage } from "./pages/productosPages/verMasPage"
 
 export const FeriaOnline = () => {
   return (
@@ -17,20 +18,22 @@ export const FeriaOnline = () => {
       <NavBar></NavBar>
       <Routes>
         <Route path="/" element={<ProductosPage />} />
-        <Route path="/productos" element={<ProductosPage />}></Route>
-        <Route path="/vender" element={<VenderPage />}></Route>
+        <Route path="/productos" element={<ProductosPage />} />
+        <Route path="/productos/descripcionProducto" element={<VerMasPage />} /> 
+        <Route path="/vender" element={<VenderPage />} />
         <Route path="/perfil" element={<PerfilPage />}>
-            <Route path="descripcion" element={<DescripcionPage />} />
-            <Route path="editarPerfil" element={<EditarPerfil/>} />
-            <Route path="misPublicaciones" element={<MisPublicacionesPage />} />
-            <Route path="misCompras" element={<MisComprasPage />} />
-            <Route path="misVentas" element={<MisVentasPage />} />
-            <Route path="" element={<Navigate to="descripcion" />} />
+          <Route path="descripcion" element={<DescripcionPage />} />
+          <Route path="editarPerfil" element={<EditarPerfil />} />
+          <Route path="misPublicaciones" element={<MisPublicacionesPage />} />
+          <Route path="misCompras" element={<MisComprasPage />} />
+          <Route path="misVentas" element={<MisVentasPage />} />
+          <Route path="" element={<Navigate to="descripcion" />} />
         </Route>
-        <Route path="/login" element={<LoginPage/>}></Route>
-        <Route path="/registro" element={<RegistroPage/>}></Route>
-        <Route path="/*" element={<Navigate to='/'></Navigate>}></Route>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/registro" element={<RegistroPage />} />
+        <Route path="/*" element={<Navigate to='/' />} />
       </Routes>
+
     </>
   )
 }
