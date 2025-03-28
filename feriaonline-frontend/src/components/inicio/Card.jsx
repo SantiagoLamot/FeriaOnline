@@ -1,16 +1,20 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const Card = () => {
+export const Card = ({id,titulo, foto, precio, descripcion}) => {
+    const navigate = useNavigate();
+    const handleVerMas = () => {
+        navigate("./productos/descripcionProducto", { state: { id, titulo, foto, precio, descripcion} })
+    }
     return (
         <>
             <div className="card m-3" style={{ width: "18rem" }}>
-                <img src="..." className="card-img-top" alt="Foto del producto" />
+                <img src={foto} className="card-img-top" alt={titulo} />
                 <div className="card-body">
-                    <h5 className="card-title">Titulo del producto</h5>
-                    <p className="card-text">Precio:</p>
-                    <Link to="/productos/descripcionProducto" className="btn btn-primary">
+                    <h5 className="card-title">{titulo}</h5>
+                    <p className="card-text">${precio}</p>
+                    <button onClick={handleVerMas} className="btn btn-primary">
                         Ver más
-                    </Link>
+                    </button>
                 </div>
             </div>
         </>
