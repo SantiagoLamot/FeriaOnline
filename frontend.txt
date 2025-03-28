@@ -1,0 +1,15 @@
+1)nav var
+
+2)menú productos
+
+3) Perfil (SI ESTA LOGUEADO)
+- mostrar contador
+- mis compras(falta ver mas de la compra)
+- mis ventas(falta ver mas de la compra)
+- mis publicaciones(falta ver mas de la compra)
+
+4) Perfil(SI NO ESTA LOGUEADO)
+
+5) Iniciar Sesión
+
+6) Registrarse
