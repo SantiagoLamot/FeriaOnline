@@ -12,6 +12,7 @@ import { MisVentasPage } from "./pages/PerfilPages/MisVentasPage"
 import { ProductosPage } from "./pages/ProductosPage"
 import { VerMasPage } from "./pages/productosPages/verMasPage"
 import { VenderPage } from "./pages/VenderPage"
+import { DetallesCompraVentaPage } from "./pages/transaccionesPages/DetallesCompraVentaPage"
 
 
 export const FeriaOnline = () => {
@@ -22,6 +23,7 @@ export const FeriaOnline = () => {
         <Route path="/" element={<ProductosPage />} />
         <Route path="/productos" element={<ProductosPage />} />
         <Route path="/productos/descripcionProducto" element={<VerMasPage />} />
+        <Route path="/detallesCompraVenta" element={<DetallesCompraVentaPage />} />
         <Route path="/vender" element={<VenderPage />} />
         <Route path="/perfil" element={<PerfilPage />}>
           <Route path="descripcion" element={<DescripcionPage />} />
