@@ -1,0 +1,39 @@
+ENTIDADES:
+[SANTI]
+CREATE TABLE Usuarios_tb (
+    ID_Usuario INT AUTO_INCREMENT PRIMARY KEY,
+    NombreDeUsuario VARCHAR(50) NOT NULL UNIQUE,
+    Correo VARCHAR(100) NOT NULL UNIQUE,
+    Contrasena VARCHAR(255) NOT NULL,
+    Nombre VARCHAR(50),
+    Apellido VARCHAR(50),
+    FotoDePerfil TEXT
+);
+[FACU]
+CREATE TABLE Publicaciones_tb (
+    ID_Publicacion INT AUTO_INCREMENT PRIMARY KEY,
+    NombreProducto VARCHAR(100) NOT NULL,
+    Descripcion TEXT,
+    Precio DECIMAL(10,2) NOT NULL,
+    Estado ENUM('Activo', 'Inactivo') NOT NULL,
+    ID_UsuarioVendedor INT NOT NULL,
+    FOREIGN KEY (ID_UsuarioVendedor) REFERENCES Usuarios_tb(ID_Usuario) ON DELETE CASCADE
+);
+[FACU]
+CREATE TABLE ImagenesxPublicacion_tb (
+    ID_Imagenes INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Publicacion INT NOT NULL,
+    Imagen TEXT NOT NULL,
+    FOREIGN KEY (ID_Publicacion) REFERENCES Publicaciones_tb(ID_Publicacion) ON DELETE CASCADE
+);
+[SANTI]
+CREATE TABLE Transacciones_tb (
+    ID_Orden INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Publicacion INT NOT NULL,
+    ID_UsuarioComprador INT NOT NULL,
+    MetodoDePago VARCHAR(50) NOT NULL,
+    Fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Estado ENUM('Pendiente', 'Completado', 'Cancelado') NOT NULL,
+    FOREIGN KEY (ID_Publicacion) REFERENCES Publicaciones_tb(ID_Publicacion) ON DELETE CASCADE,
+    FOREIGN KEY (ID_UsuarioComprador) REFERENCES Usuarios_tb(ID_Usuario) ON DELETE CASCADE
+);
