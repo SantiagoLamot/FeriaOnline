@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS MiBaseDeDatos;
-USE MiBaseDeDatos;
+CREATE DATABASE IF NOT EXISTS Feria_Online_Tpq_DB;
+USE Feria_Online_Tpq_DB;
 
 CREATE TABLE Usuarios_tb (
     ID_Usuario INT AUTO_INCREMENT PRIMARY KEY,
