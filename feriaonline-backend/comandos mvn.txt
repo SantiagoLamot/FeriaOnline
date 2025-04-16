@@ -1,0 +1,3 @@
+comandos maven:
+mvn clean install : "Reinstalar" e instalar dependencias
+mvn spring-boot:run : Levantar backend
