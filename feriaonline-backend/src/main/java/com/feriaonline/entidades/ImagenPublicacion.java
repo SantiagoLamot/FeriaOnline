@@ -19,6 +19,8 @@ public class ImagenPublicacion {
     @Column(name = "Imagen", nullable = false, columnDefinition = "TEXT")
     private String imagen;
 
+    //El fetch = FetchType.LAZY evita traer la publicación completa cuando solo 
+    //necesitás la imagen, lo que mejora el rendimiento en algunos casos.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_Publicacion", nullable = false)
     private Publicacion publicacion;
