@@ -11,8 +11,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Publicaciones {
-
+public class Publicacion {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_Publicacion")
@@ -35,5 +35,4 @@ public class Publicaciones {
     /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_UsuarioVendedor", nullable = false)
     private Usuario usuarioVendedor;*/ 
-
-    }
+}

@@ -21,6 +21,6 @@ public class ImagenPublicacion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_Publicacion", nullable = false)
-    private Publicaciones publicacion;
+    private Publicacion publicacion;
 
 }
