@@ -1,4 +1,4 @@
-package com.feriaonline.dto;
+package com.feriaonline.entidadesDTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

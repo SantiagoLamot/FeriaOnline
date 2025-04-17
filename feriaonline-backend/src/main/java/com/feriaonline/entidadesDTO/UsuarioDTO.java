@@ -1,4 +1,4 @@
-package com.feriaonline.dto;
+package com.feriaonline.entidadesDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
