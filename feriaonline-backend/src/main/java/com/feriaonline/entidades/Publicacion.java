@@ -31,8 +31,7 @@ public class Publicacion {
     @Column(name = "Estado", nullable = false)
     private EstadoPublicacion estado;
 
-    //Descomentar cuando se haga entidad usuario
-    /*@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_UsuarioVendedor", nullable = false)
-    private Usuario usuarioVendedor;*/ 
+    private Usuario usuarioVendedor; 
 }
