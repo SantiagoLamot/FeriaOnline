@@ -1,0 +1,33 @@
+SELECT 
+    t.ID_Orden,
+    t.Fecha,
+    t.MetodoDePago,
+    t.Estado AS EstadoTransaccion,
+
+    -- Datos de la publicación
+    p.ID_Publicacion,
+    p.NombreProducto,
+    p.Descripcion,
+    p.Precio,
+    p.Estado AS EstadoPublicacion,
+
+    -- Datos del vendedor
+    v.ID_Usuario AS ID_Vendedor,
+    v.NombreDeUsuario AS UsuarioVendedor,
+    v.Correo AS CorreoVendedor,
+    v.Nombre AS NombreVendedor,
+    v.Apellido AS ApellidoVendedor,
+    v.FotoDePerfil AS FotoVendedor,
+
+    -- Datos del comprador
+    c.ID_Usuario AS ID_Comprador,
+    c.NombreDeUsuario AS UsuarioComprador,
+    c.Correo AS CorreoComprador,
+    c.Nombre AS NombreComprador,
+    c.Apellido AS ApellidoComprador,
+    c.FotoDePerfil AS FotoComprador
+
+FROM Transacciones_tb t
+JOIN Publicaciones_tb p ON t.ID_Publicacion = p.ID_Publicacion
+JOIN Usuarios_tb v ON t.ID_UsuarioVendedor = v.ID_Usuario
+JOIN Usuarios_tb c ON t.ID_UsuarioComprador = c.ID_Usuario;
