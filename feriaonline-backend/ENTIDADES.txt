@@ -31,9 +31,11 @@ CREATE TABLE Transacciones_tb (
     ID_Orden INT AUTO_INCREMENT PRIMARY KEY,
     ID_Publicacion INT NOT NULL,
     ID_UsuarioComprador INT NOT NULL,
+    ID_UsuarioVendedor INT NOT NULL,
     MetodoDePago VARCHAR(50) NOT NULL,
     Fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Estado ENUM('Pendiente', 'Completado', 'Cancelado') NOT NULL,
     FOREIGN KEY (ID_Publicacion) REFERENCES Publicaciones_tb(ID_Publicacion) ON DELETE CASCADE,
-    FOREIGN KEY (ID_UsuarioComprador) REFERENCES Usuarios_tb(ID_Usuario) ON DELETE CASCADE
+    FOREIGN KEY (ID_UsuarioComprador) REFERENCES Usuarios_tb(ID_Usuario) ON DELETE CASCADE,
+    FOREIGN KEY (ID_UsuarioVendedor) REFERENCES Usuarios_tb(ID_Usuario) ON DELETE CASCADE
 );
