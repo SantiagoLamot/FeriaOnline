@@ -1,0 +1,166 @@
+package com.feriaonline.mappers;
+
+import com.feriaonline.entidades.Publicacion;
+import com.feriaonline.entidades.Usuario;
+import com.feriaonline.entidadesDTO.PublicacionDTO;
+import com.feriaonline.entidadesDTO.PublicacionRequestDTO;
+import org.mapstruct.*;
+import org.mapstruct.factory.Mappers;
+
+Palabras con @: Anotaciones: En Java se llaman anotaciones, y son metadatos que le dicen al compilador o a herramientas externas cómo deben comportarse ciertas clases o métodos.
+Que es MAPSTRUCT: Es una librería que genera código para convertir objetos de una clase a otra (lo que se llama "mapping"). Ahorra escribir código repetitivo como
+dto.setNombreProducto(publicacion.getNombreProducto());.
+MapStruct hace eso por vos con solo anotar la interfaz.
+
+//@Mapper: Le dice a MapStruct que esta interfaz es un mapper.
+//componentModel = "spring": Hace que MapStruct registre automáticamente este mapper como un componente de Spring, así podés inyectarlo con @Autowired.
+@Mapper(componentModel = "spring")
+public interface PublicacionMapper {
+
+	//Es una interfaz de MapStruct que define métodos para convertir entre:
+	Publicacion → PublicacionDTO (cuando querés devolver datos al cliente).
+	PublicacionDTO → Publicacion (si querés reconstruir una entidad desde un DTO).
+	PublicacionRequestDTO → Publicacion (cuando el cliente envía datos para
+	No tiene lógica escrita a mano porque MapStruct genera el código automáticamente en tiempo de compilación.//
+	
+    	//Esta línea permite usar el mapper como una instancia estática, útil si no estás usando Spring.
+	//Si ya usás componentModel = "spring" y tenés inyección de dependencias, no necesitás esta línea, podés borrarla.
+    PublicacionMapper INSTANCE = Mappers.getMapper(PublicacionMapper.class);
+
+
+
+	//Convierte una entidad Publicacion a PublicacionDTO.
+	//@Mapping: le dice a MapStruct cómo mapear un campo que no se llama igual.
+	//source = "usuarioVendedor.id" → accede al ID del usuario vendedor.
+	//target = "idUsuarioVendedor" → lo pone en el DTO bajo ese nombre.
+    // Publicacion -> DTO para respuesta
+    @Mapping(source = "usuarioVendedor.id", target = "idUsuarioVendedor")
+    PublicacionDTO toDTO(Publicacion publicacion);
+
+	//InheritInverseConfiguration: dice "usá la configuración inversa de toDTO".
+	//@Mapping(..., ignore = true): ignora ese campo, porque lo vas a setear manualmente en el servicio (con un Usuario que buscás desde el ID).
+    // DTO -> Publicacion
+    @InheritInverseConfiguration
+    @Mapping(target = "usuarioVendedor", ignore = true) // lo seteamos aparte en el servicio
+    Publicacion toEntity(PublicacionDTO dto);
+
+	//Convierte de un DTO de creación (RequestDTO) a una entidad Publicacion.
+	//Ignora id (porque se genera automáticamente) y usuarioVendedor (porque viene solo el ID y lo resolvés desde el servicio).
+    // RequestDTO -> Publicacion (para crear o actualizar)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "usuarioVendedor", ignore = true) // lo seteás en el servicio con el ID
+    Publicacion fromRequest(PublicacionRequestDTO request);
+}
+
+Como funciona esto? : 
+Publicacion publicacion = publicacionMapper.fromRequest(requestDTO);
+publicacion.setUsuarioVendedor(usuarioRepository.findById(requestDTO.getIdUsuarioVendedor()).orElseThrow(...));
+publicacionRepository.save(publicacion);
+
+Codigo sin explicar:
+package com.feriaonline.mappers;
+
+import com.feriaonline.entidades.Publicacion;
+import com.feriaonline.entidades.Usuario;
+import com.feriaonline.entidadesDTO.PublicacionDTO;
+import com.feriaonline.entidadesDTO.PublicacionRequestDTO;
+import org.mapstruct.*;
+import org.mapstruct.factory.Mappers;
+
+@Mapper(componentModel = "spring")
+public interface PublicacionMapper {
+
+    PublicacionMapper INSTANCE = Mappers.getMapper(PublicacionMapper.class);
+
+    // Publicacion -> DTO para respuesta
+    @Mapping(source = "usuarioVendedor.id", target = "idUsuarioVendedor")
+    PublicacionDTO toDTO(Publicacion publicacion);
+
+    // DTO -> Publicacion
+    @InheritInverseConfiguration
+    @Mapping(target = "usuarioVendedor", ignore = true) // lo seteamos aparte en el servicio
+    Publicacion toEntity(PublicacionDTO dto);
+
+    // RequestDTO -> Publicacion (para crear o actualizar)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "usuarioVendedor", ignore = true) // lo seteás en el servicio con el ID
+    Publicacion fromRequest(PublicacionRequestDTO request);
+}
+
+Explicacion de lo que hace mapstruct: No lo ves directamente en tu código fuente, pero se crea al compilar (en la carpeta target/generated-sources/annotations si querés verlo en tu proyecto Maven/Gradle).
+
+// Clase generada automáticamente (no escribir a mano)
+package com.feriaonline.mappers;
+
+import com.feriaonline.entidades.Publicacion;
+import com.feriaonline.entidades.Usuario;
+import com.feriaonline.entidadesDTO.PublicacionDTO;
+import com.feriaonline.entidadesDTO.PublicacionRequestDTO;
+
+public class PublicacionMapperImpl implements PublicacionMapper {
+
+    @Override
+    public PublicacionDTO toDTO(Publicacion publicacion) {
+        if (publicacion == null) {
+            return null;
+        }
+
+        PublicacionDTO dto = new PublicacionDTO();
+
+        dto.setId(publicacion.getId());
+        dto.setNombreProducto(publicacion.getNombreProducto());
+        dto.setDescripcion(publicacion.getDescripcion());
+        dto.setPrecio(publicacion.getPrecio());
+        dto.setEstado(publicacion.getEstado());
+
+        // Este es el campo mapeado manualmente
+        if (publicacion.getUsuarioVendedor() != null) {
+            dto.setIdUsuarioVendedor(publicacion.getUsuarioVendedor().getId());
+        }
+
+        return dto;
+    }
+
+    @Override
+    public Publicacion toEntity(PublicacionDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
+        Publicacion publicacion = new Publicacion();
+
+        publicacion.setId(dto.getId());
+        publicacion.setNombreProducto(dto.getNombreProducto());
+        publicacion.setDescripcion(dto.getDescripcion());
+        publicacion.setPrecio(dto.getPrecio());
+        publicacion.setEstado(dto.getEstado());
+
+        // usuarioVendedor está ignorado, no se setea
+
+        return publicacion;
+    }
+
+    @Override
+    public Publicacion fromRequest(PublicacionRequestDTO request) {
+        if (request == null) {
+            return null;
+        }
+
+        Publicacion publicacion = new Publicacion();
+
+        publicacion.setNombreProducto(request.getNombreProducto());
+        publicacion.setDescripcion(request.getDescripcion());
+        publicacion.setPrecio(request.getPrecio());
+        publicacion.setEstado(request.getEstado());
+
+        // id y usuarioVendedor están ignorados
+
+        return publicacion;
+    }
+}
+
+Donde se encuentra: /target/generated-sources/annotations/com/feriaonline/mappers/PublicacionMapperImpl.java
+
+
+
+
