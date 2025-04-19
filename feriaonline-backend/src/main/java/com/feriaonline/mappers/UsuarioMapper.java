@@ -5,6 +5,12 @@ import com.feriaonline.entidadesDTO.UsuarioDTO;
 import com.feriaonline.entidadesDTO.UsuarioRequestDTO;
 import org.mapstruct.*;
 
+/*Con esto estás cubierto para:
+Crear usuarios (RequestDTO → Usuario)
+Mostrar usuarios al frontend (Usuario → DTO)
+Actualizar parcialmente un usuario existente
+Convertir DTO a Usuario sin errores ni filtraciones de contraseña */
+
 @Mapper(componentModel = "spring")
 public interface UsuarioMapper {
 
