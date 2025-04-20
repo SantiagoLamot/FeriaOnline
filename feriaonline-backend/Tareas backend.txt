@@ -1,0 +1,31 @@
+Tareas para hacer frontend-backend:
+
+Realizar inserts para probar la visualizacion/funcionalidad de la pagina.
+
+	 ---RUTA---
+
+	***Primero***
+    Funcion          Entidad
+- Registrar usuario (Usuario)
+- Iniciar sesion    (Usuario)
+- Guardar sesion    (Usuario)
+- Mostrar productos (Publicacion)
+- Ordenar productos (Publicacion)
+- Cargar venta      (Publicacion)
+	
+	***Segundo***
+    Funcion          Entidad
+- Mi perfil         (Usuario)
+- Editar mi perfil  (Usuario)
+- Mis publicaciones (Publicacion)
+- Mis ventas        (Transaccion)
+- Mis compras       (Transaccion)
+
+	***Tercero***
+    Funcion          Entidad
+- Boton comprar      / API MP
+
+Ideas para futuro administrador general:
+- Listado de transacciones con todos los detalles de estas.
+
+	
