@@ -2,6 +2,7 @@ package com.feriaonline.entidades;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.awt.image.BufferedImage;
 
 @Entity
 @Table(name = "ImagenesxPublicacion_tb")
@@ -17,7 +18,7 @@ public class ImagenPublicacion {
     private Integer id;
 
     @Column(name = "Imagen", nullable = false, columnDefinition = "TEXT")
-    private String imagen;
+    private BufferedImage imagen;
 
     //El fetch = FetchType.LAZY evita traer la publicación completa cuando solo 
     //necesitás la imagen, lo que mejora el rendimiento en algunos casos.
