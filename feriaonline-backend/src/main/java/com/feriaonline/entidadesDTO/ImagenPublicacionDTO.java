@@ -17,7 +17,7 @@ en algún sistema de archivos o servicio externo. */
 public class ImagenPublicacionDTO {
 
     private Integer id;
-    //private String imagenBase64;
+    private String imagenBase64;
     private Integer publicacionId;
 
 }
