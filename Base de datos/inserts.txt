@@ -1,0 +1,31 @@
+USE Feria_Online_Tpq_DB;
+
+INSERT INTO Usuarios_tb (NombreDeUsuario, Correo, Contrasena, Nombre, Apellido, FotoDePerfil) VALUES
+('juanito99', 'juanito99@email.com', 'hashed_pw1', 'Juan', 'Pérez', 'https://randomuser.me/api/portraits/men/32.jpg'),
+('maria23', 'maria23@email.com', 'hashed_pw2', 'María', 'López', 'https://randomuser.me/api/portraits/women/44.jpg'),
+('carlosX', 'carlosx@email.com', 'hashed_pw3', 'Carlos', 'Ramírez', 'https://randomuser.me/api/portraits/men/18.jpg'),
+('ana_dev', 'ana.dev@email.com', 'hashed_pw4', 'Ana', 'Martínez', 'https://randomuser.me/api/portraits/women/55.jpg'),
+('sofia_mkt', 'sofia@email.com', 'hashed_pw5', 'Sofía', 'García', 'https://randomuser.me/api/portraits/women/68.jpg');
+
+
+INSERT INTO Publicaciones_tb (NombreProducto, Descripcion, Precio, Estado, ID_UsuarioVendedor) VALUES
+('Camiseta Vintage', 'Camiseta de los 90s en buen estado', 25.99, 'Activo', 1),
+('Auriculares Bluetooth', 'Auriculares inalámbricos con cancelación de ruido', 59.90, 'Activo', 2),
+('Laptop Usada', 'Laptop i5 con 8GB RAM y SSD de 256GB', 299.99, 'Inactivo', 3),
+('Silla Gamer', 'Silla ergonómica reclinable color negro y rojo', 150.00, 'Activo', 4),
+('Mesa de Madera', 'Mesa artesanal de roble para comedor', 200.00, 'Activo', 5);
+
+INSERT INTO ImagenesxPublicacion_tb (ID_Publicacion, Imagen) VALUES
+(1, 'https://images.unsplash.com/photo-1600185365483-26e7c6f2e7d6'), -- camiseta
+(1, 'https://images.unsplash.com/photo-1628000548965-e7f5951b1ac3'), -- camiseta detalle
+(2, 'https://images.unsplash.com/photo-1585386959984-a41552231658'), -- auriculares
+(3, 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8'), -- laptop
+(4, 'https://images.unsplash.com/photo-1616627451541-9e7edb7f0d3f'), -- silla gamer
+(4, 'https://images.unsplash.com/photo-1630643303862-f7b9b7dc1f6d'), -- silla lateral
+(5, 'https://images.unsplash.com/photo-1606312619344-2f9e3d3276a5'); -- mesa
+
+INSERT INTO Transacciones_tb (ID_Publicacion, ID_UsuarioComprador, ID_UsuarioVendedor, MetodoDePago, Estado) VALUES
+(1, 2, 1, 'Tarjeta de Crédito', 'Completado'),
+(2, 3, 2, 'PayPal', 'Pendiente'),
+(3, 1, 3, 'Transferencia Bancaria', 'Cancelado'),
+(5, 4, 5, 'Efectivo', 'Completado');
