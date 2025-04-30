@@ -6,20 +6,20 @@ Realizar inserts para probar la visualizacion/funcionalidad de la pagina.
 
 	***Primero***
     Funcion          Entidad
-- Registrar usuario (Usuario)
-- Iniciar sesion    (Usuario)
-- Guardar sesion    (Usuario)
-- Mostrar productos (Publicacion)
-- Ordenar productos (Publicacion)
-- Cargar venta      (Publicacion)
+- Registrar usuario (Usuario) Facu
+- Iniciar sesion    (Usuario) Facu
+- Guardar sesion    (Usuario) Facu
+- Mostrar productos (Publicacion)  Santi
+- Ordenar productos (Publicacion)  Santi
+- Cargar venta      (Publicacion)  Santi
 	
 	***Segundo***
     Funcion          Entidad
-- Mi perfil         (Usuario)
-- Editar mi perfil  (Usuario)
-- Mis publicaciones (Publicacion)
-- Mis ventas        (Transaccion)
-- Mis compras       (Transaccion)
+- Mi perfil         (Usuario) Facu
+- Editar mi perfil  (Usuario) Facu 
+- Mis publicaciones (Publicacion) Santi
+- Mis ventas        (Transaccion) Santi
+- Mis compras       (Transaccion) Santi
 
 	***Tercero***
     Funcion          Entidad
