@@ -1,6 +1,9 @@
 package com.feriaonline.entidadesDTO;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /*Como buena práctica, los DTOs no deben incluir entidades completas como Publicacion, 
 sino solo su ID u otra información relevante para evitar el acoplamiento innecesario.
@@ -17,7 +20,7 @@ en algún sistema de archivos o servicio externo. */
 public class ImagenPublicacionDTO {
 
     private Integer id;
-    private String imagenBase64;
+    private String url; // URL de la imagen
     private Integer publicacionId;
 
 }
