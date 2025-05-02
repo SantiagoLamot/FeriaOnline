@@ -1,15 +1,18 @@
 package com.feriaonline.mappers;
 
-import com.feriaonline.entidadesDTO.ImagenPublicacionDTO;
-import com.feriaonline.entidades.ImagenPublicacion;
-import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
-
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
+
 import javax.imageio.ImageIO;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Named;
+import org.mapstruct.factory.Mappers;
+
+import com.feriaonline.entidades.ImagenPublicacion;
+import com.feriaonline.entidadesDTO.ImagenPublicacionDTO;
 
 
 /*como MapStruct no sabe convertir automáticamente BufferedImage a String (Base64) 
@@ -20,16 +23,18 @@ public interface ImagenPublicacionMapper {
 
     ImagenPublicacionMapper INSTANCE = Mappers.getMapper(ImagenPublicacionMapper.class);
 
-    @Mappings({
+    /*
+
+     @Mappings({
         @Mapping(source = "imagen", target = "imagenBase64", qualifiedByName = "bufferedImageToBase64"),
         @Mapping(source = "publicacion.id", target = "publicacionId")
     })
     ImagenPublicacionDTO toDTO(ImagenPublicacion entity);
-
     @Mappings({
         @Mapping(source = "imagenBase64", target = "imagen", qualifiedByName = "base64ToBufferedImage"),
         @Mapping(target = "publicacion", ignore = true) // se debe setear aparte
     })
+    */
     ImagenPublicacion toEntity(ImagenPublicacionDTO dto);
 
     @Named("bufferedImageToBase64")
