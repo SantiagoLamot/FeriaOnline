@@ -32,9 +32,8 @@ public class PublicacionDTO {
         this.precio = p.getPrecio();
         this.estado = p.getEstado();
         this.idUsuarioVendedor = p.getUsuarioVendedor().getId();
-        this.imagenes.addAll(p.getImagenes().stream()
+        this.imagenes = p.getImagenes().stream()
                                 .map(ImagenPublicacionDTO::new)
-                                .collect(Collectors.toList()));
+                                .collect(Collectors.toList());
     }
-
 }
