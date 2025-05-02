@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "ImagenesxPublicacion_tb")
+@Table(name = "imagenes_por_publicacion_tb")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

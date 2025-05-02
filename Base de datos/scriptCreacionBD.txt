@@ -13,15 +13,15 @@ CREATE TABLE Usuarios_tb (
 
 CREATE TABLE Publicaciones_tb (
     ID_Publicacion INT AUTO_INCREMENT PRIMARY KEY,
-    NombreProducto VARCHAR(100) NOT NULL,
+    nombre_producto VARCHAR(100) NOT NULL,
     Descripcion TEXT,
     Precio DECIMAL(10,2) NOT NULL,
     Estado ENUM('Activo', 'Inactivo') NOT NULL,
-    ID_UsuarioVendedor INT NOT NULL,
-    FOREIGN KEY (ID_UsuarioVendedor) REFERENCES Usuarios_tb(ID_Usuario) ON DELETE CASCADE
+    id_usuario_vendedor INT NOT NULL,
+    FOREIGN KEY (id_usuario_vendedor) REFERENCES Usuarios_tb(ID_Usuario) ON DELETE CASCADE
 );
 
-CREATE TABLE ImagenesxPublicacion_tb (
+CREATE TABLE imagenes_por_publicacion_tb (
     ID_Imagenes INT AUTO_INCREMENT PRIMARY KEY,
     ID_Publicacion INT NOT NULL,
     Imagen TEXT NOT NULL,

@@ -8,14 +8,14 @@ INSERT INTO Usuarios_tb (NombreDeUsuario, Correo, Contrasena, Nombre, Apellido, 
 ('sofia_mkt', 'sofia@email.com', 'hashed_pw5', 'Sofía', 'García', 'https://randomuser.me/api/portraits/women/68.jpg');
 
 
-INSERT INTO Publicaciones_tb (NombreProducto, Descripcion, Precio, Estado, ID_UsuarioVendedor) VALUES
+INSERT INTO Publicaciones_tb (nombre_producto, Descripcion, Precio, Estado, id_usuario_vendedor) VALUES
 ('Camiseta Vintage', 'Camiseta de los 90s en buen estado', 25.99, 'Activo', 1),
 ('Auriculares Bluetooth', 'Auriculares inalámbricos con cancelación de ruido', 59.90, 'Activo', 2),
 ('Laptop Usada', 'Laptop i5 con 8GB RAM y SSD de 256GB', 299.99, 'Inactivo', 3),
 ('Silla Gamer', 'Silla ergonómica reclinable color negro y rojo', 150.00, 'Activo', 4),
 ('Mesa de Madera', 'Mesa artesanal de roble para comedor', 200.00, 'Activo', 5);
 
-INSERT INTO ImagenesxPublicacion_tb (ID_Publicacion, Imagen) VALUES
+INSERT INTO imagenes_por_publicacion_tb (ID_Publicacion, Imagen) VALUES
 (1, 'https://images.unsplash.com/photo-1600185365483-26e7c6f2e7d6'), -- camiseta
 (1, 'https://images.unsplash.com/photo-1628000548965-e7f5951b1ac3'), -- camiseta detalle
 (2, 'https://images.unsplash.com/photo-1585386959984-a41552231658'), -- auriculares
@@ -28,4 +28,4 @@ INSERT INTO Transacciones_tb (ID_Publicacion, ID_UsuarioComprador, ID_UsuarioVen
 (1, 2, 1, 'Tarjeta de Crédito', 'Completado'),
 (2, 3, 2, 'PayPal', 'Pendiente'),
 (3, 1, 3, 'Transferencia Bancaria', 'Cancelado'),
-(5, 4, 5, 'Efectivo', 'Completado');
+(5, 4, 5, 'Efectivo', 'Completado'););
