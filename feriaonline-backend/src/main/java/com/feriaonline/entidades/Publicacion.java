@@ -54,5 +54,4 @@ public class Publicacion {
 
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ImagenPublicacion> imagenes = new ArrayList<>();
-
 }

@@ -1,5 +1,7 @@
 package com.feriaonline.entidadesDTO;
 
+import com.feriaonline.entidades.ImagenPublicacion;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +25,12 @@ public class ImagenPublicacionDTO {
     private String url; // URL de la imagen
     private Integer publicacionId;
 
+    ImagenPublicacionDTO(ImagenPublicacion i)
+    {
+        this.id = i.getId();
+        this.publicacionId = i.getPublicacion().getId();
+        this.url = i.getUrl();
+    }
 }
 
 /*¿Qué deberías hacer en el servicio?
