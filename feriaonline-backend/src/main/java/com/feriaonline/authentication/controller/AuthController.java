@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.feriaonline.entidades.Usuario;
 import com.feriaonline.service.UsuarioService;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
     

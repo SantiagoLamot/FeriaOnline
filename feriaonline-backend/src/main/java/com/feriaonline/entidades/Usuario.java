@@ -1,42 +1,37 @@
 package com.feriaonline.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Usuarios_tb")
 @Data
+@Table(name = "usuarios_tb")
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Usuario")
+    @Column(name = "id_usuario")
     private Integer id;
 
-    @Column(name = "NombreDeUsuario", nullable = false, unique = true, length = 50)
+    @Column(name = "nombre_de_usuario", nullable = false, unique = true, length = 50)
     private String nombreDeUsuario;
 
-    @Column(name = "Correo", nullable = false, unique = true, length = 100)
+    @Column(name = "correo", nullable = false, unique = true, length = 100)
     private String correo;
 
-    @Column(name = "Contrasena", nullable = false, length = 255)
+    @Column(name = "contrasena", nullable = false, length = 255)
     private String contrasena;
 
-    @Column(name = "Nombre", length = 50)
+    @Column(name = "nombre", length = 50)
     private String nombre;
 
-    @Column(name = "Apellido", length = 50)
+    @Column(name = "apellido", length = 50)
     private String apellido;
 
-    @Column(name = "FotoDePerfil", columnDefinition = "TEXT")
+    @Column(name = "foto_de_perfil", columnDefinition = "TEXT")
     private String fotoDePerfil;
 }

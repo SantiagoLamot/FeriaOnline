@@ -6,5 +6,4 @@ public record RegisterRequest(
     String contrasena,
     String nombre,
     String apellido
-) {
-}
+) {}
