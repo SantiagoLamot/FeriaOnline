@@ -1,6 +1,5 @@
 package com.feriaonline.authentication.service;
 
-
 import java.util.Date;
 import java.util.Map;
 
@@ -17,13 +16,13 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
-    @Value("${application.properties.jwt.secret-key}")
+    @Value("${application.security.jwt.secret-key}")
     private String secretKey;
 
-    @Value("${application.properties.jwt.expiration}")
+    @Value("${application.security.jwt.expiration}")
     private long jwtExpiration;
 
-    @Value("${application.properties.jwt.refresh-token.expiration}")
+    @Value("${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
 
     public String generateToken(final Usuario user) {
@@ -42,7 +41,7 @@ public class JwtService {
                 .claims(Map.of("nombre", user.getNombre()))
                 .subject(user.getCorreo())
                 .issuedAt(new Date(System.currentTimeMillis())) // Fecha de emisión
-                .expiration(new Date (System.currentTimeMillis() + expiration)) // Fecha de expiración
+                .expiration(new Date(System.currentTimeMillis() + expiration)) // Fecha de expiración
                 .signWith(getSignInKey()) // Firma el token con la clave secreta
                 .compact(); // Genera el JWT como String
     }
