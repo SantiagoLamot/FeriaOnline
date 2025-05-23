@@ -11,7 +11,6 @@ CREATE TABLE usuarios_tb (
     foto_de_perfil TEXT
 );
 
-
 CREATE TABLE Publicaciones_tb (
     ID_Publicacion INT AUTO_INCREMENT PRIMARY KEY,
     nombre_producto VARCHAR(100) NOT NULL,
@@ -19,7 +18,7 @@ CREATE TABLE Publicaciones_tb (
     Precio DECIMAL(10,2) NOT NULL,
     Estado ENUM('Activo', 'Inactivo') NOT NULL,
     id_usuario_vendedor INT NOT NULL,
-    FOREIGN KEY (id_usuario_vendedor) REFERENCES Usuarios_tb(ID_Usuario) ON DELETE CASCADE
+    FOREIGN KEY (id_usuario_vendedor) REFERENCES usuarios_tb(id_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE imagenes_por_publicacion_tb (
@@ -38,6 +37,16 @@ CREATE TABLE Transacciones_tb (
     Fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Estado ENUM('Pendiente', 'Completado', 'Cancelado') NOT NULL,
     FOREIGN KEY (ID_Publicacion) REFERENCES Publicaciones_tb(ID_Publicacion) ON DELETE CASCADE,
-    FOREIGN KEY (ID_UsuarioComprador) REFERENCES Usuarios_tb(ID_Usuario) ON DELETE CASCADE,
-    FOREIGN KEY (ID_UsuarioVendedor) REFERENCES Usuarios_tb(ID_Usuario) ON DELETE CASCADE
+    FOREIGN KEY (ID_UsuarioComprador) REFERENCES usuarios_tb(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (ID_UsuarioVendedor) REFERENCES usuarios_tb(id_usuario) ON DELETE CASCADE
+);
+
+CREATE TABLE tokens_tb (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) UNIQUE,
+    token_type ENUM('BEARER') DEFAULT 'BEARER',
+    is_revoked BOOLEAN NOT NULL,
+    is_expired BOOLEAN NOT NULL,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES usuarios_tb(id_usuario) ON DELETE CASCADE
 );
