@@ -29,13 +29,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Publicacion {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_Publicacion")
     private Integer id;
 
-    @Column(name = "NombreProducto", nullable = false, length = 100)
+    @Column(name = "nombre_producto", nullable = false, length = 100)
     private String nombreProducto;
 
     @Column(name = "Descripcion", columnDefinition = "TEXT")
@@ -49,7 +49,7 @@ public class Publicacion {
     private EstadoPublicacion estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_UsuarioVendedor", nullable = false)
+    @JoinColumn(name = "id_usuario_vendedor", nullable = false)
     private Usuario usuarioVendedor;
 
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

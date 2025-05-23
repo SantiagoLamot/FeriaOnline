@@ -8,5 +8,5 @@ import com.feriaonline.entidades.Publicacion;
 
 @Repository
 public interface PublicacionRepository extends JpaRepository<Publicacion, Integer>{
-    List<Publicacion> findByVendedorId(Long idUsuario);
+    List<Publicacion> findByUsuarioVendedor_Id(Integer idUsuario);
 }
