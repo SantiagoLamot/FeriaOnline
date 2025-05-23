@@ -1,15 +1,16 @@
 CREATE DATABASE IF NOT EXISTS Feria_Online_Tpq_DB;
 USE Feria_Online_Tpq_DB;
 
-CREATE TABLE Usuarios_tb (
-    ID_Usuario INT AUTO_INCREMENT PRIMARY KEY,
-    NombreDeUsuario VARCHAR(50) NOT NULL UNIQUE,
-    Correo VARCHAR(100) NOT NULL UNIQUE,
-    Contrasena VARCHAR(255) NOT NULL,
-    Nombre VARCHAR(50),
-    Apellido VARCHAR(50),
-    FotoDePerfil TEXT
+CREATE TABLE usuarios_tb (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_de_usuario VARCHAR(50) NOT NULL UNIQUE,
+    correo VARCHAR(100) NOT NULL UNIQUE,
+    contrasena VARCHAR(255) NOT NULL,
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    foto_de_perfil TEXT
 );
+
 
 CREATE TABLE Publicaciones_tb (
     ID_Publicacion INT AUTO_INCREMENT PRIMARY KEY,
