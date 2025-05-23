@@ -7,37 +7,36 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data 
-@Builder 
+@Data
+@Builder
 @NoArgsConstructor
-@AllArgsConstructor 
-@Entity 
-public final class Token { 
+@AllArgsConstructor
+@Entity
+public final class Token {
 
     @Id
-    @GeneratedValue 
-    private Integer id; 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column(unique = true) 
-    private String token; 
+    @Column(unique = true)
+    private String token;
 
-    @Enumerated(EnumType.STRING) 
-    @Builder.Default 
-    private TokenType tokenType = TokenType.BEARER; 
-
-    @Column(nullable = false)
-    private Boolean isRevoked; 
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private TokenType tokenType = TokenType.BEARER;
 
     @Column(nullable = false)
-    private Boolean isExpired; 
+    private Boolean isRevoked;
 
-    @ManyToOne(fetch = FetchType.LAZY) 
-    @JoinColumn(name = "user_id") 
+    @Column(nullable = false)
+    private Boolean isExpired;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private Usuario usuario;
 
     public enum TokenType {
-        BEARER 
+        BEARER
     }
 
 }
-
