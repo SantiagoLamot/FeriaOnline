@@ -1,5 +1,7 @@
 package com.feriaonline.authentication.service;
 
+import java.util.List;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -64,6 +66,7 @@ public class AuthService {
             .orElseThrow();
         String token = jwtService.generateToken(usuario);
         String tokenR = jwtService.generateRefreshToken(usuario);
+        revocarTokenUsuario(usuario);
         saveUserToken(usuario, token);
         return new TokenResponse(token, tokenR);
     }
@@ -77,5 +80,16 @@ public class AuthService {
                 .isRevoked(false)
                 .build();
         tokenRepository.save(token);
+    }
+
+    private void revocarTokenUsuario(Usuario usuario){
+        final List<Token> tokenValidos = tokenRepository.findByIsExpiredFalseAndIsRevokedFalseAndUsuario(usuario);
+        if(!tokenValidos.isEmpty()){
+            for(Token t : tokenValidos){
+                t.setIsExpired(true);
+                t.setIsRevoked(true);
+            }
+            tokenRepository.saveAll(tokenValidos);
+        }
     }
 }
