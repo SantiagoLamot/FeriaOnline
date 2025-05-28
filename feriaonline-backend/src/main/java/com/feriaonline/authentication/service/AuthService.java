@@ -112,5 +112,13 @@ public class AuthService {
         if (!isTokenValid) {
             return null; // O lanzar una excepción si se prefiere
         }
+
+        final String accesToken = jwtService.generateRefreshToken(usuario);
+
+        revocarTokenUsuario(usuario);
+        saveUserToken(usuario, accesToken);
+
+        return new TokenResponse(accesToken, refreshToken);
     }
+
 }
