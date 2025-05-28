@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.RequestHeader;
 import com.feriaonline.authentication.service.AuthService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(service.login(request));
+    }
+
+     @PostMapping("/refresh-token")
+    public TokenResponse refreshToken(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) final String authentication 
+    ) {
+        return service.refreshToken(authentication); 
     }
 
 }
