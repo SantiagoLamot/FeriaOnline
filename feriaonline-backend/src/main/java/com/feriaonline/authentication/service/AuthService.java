@@ -94,9 +94,18 @@ public class AuthService {
 
     public TokenResponse refreshToken(@NotNull final String authentication) {
 
-        if (authentication == null || !auhtentication.startsWith("Bearer ")) {
+        if (authentication == null || !authentication.startsWith("Bearer ")) {
             throw new IllegalArgumentException("Token de autenticación no válido");
         }
 
+        final String refreshToken = authentication.substring(7);
+
+        final String username = jwtService.extractUsername(refreshToken);
+        if (username == null) {
+            throw new IllegalArgumentException("Token de autenticación no válido");
+        }
+
+        final Usuario usuario = this.usuarioRepository.findByCorreo(username)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
     }
 }
