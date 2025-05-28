@@ -14,7 +14,7 @@ import com.feriaonline.authentication.repository.Token;
 import com.feriaonline.authentication.repository.TokenRepository;
 import com.feriaonline.entidades.Usuario;
 import com.feriaonline.repository.UsuarioRepository;
-
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -54,7 +54,6 @@ public class AuthService {
         return new TokenResponse(jwtToken, refreshToken);
     }
 
-
     public TokenResponse login(LoginRequest request){
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
@@ -91,5 +90,13 @@ public class AuthService {
             }
             tokenRepository.saveAll(tokenValidos);
         }
+    }
+
+    public TokenResponse refreshToken(@NotNull final String authentication) {
+
+        if (authentication == null || !auhtentication.startsWith("Bearer ")) {
+            throw new IllegalArgumentException("Token de autenticación no válido");
+        }
+
     }
 }
