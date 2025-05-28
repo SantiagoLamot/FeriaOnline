@@ -1,0 +1,20 @@
+Registro:
+
+http://localhost:8080/api/auth/register
+
+{
+  "nombreDeUsuario": "",
+  "correo": " ",
+  "contrasena": " ",
+  "nombre": " ",
+  "apellido": " "
+}
+
+Login:
+
+http://localhost:8080/api/auth/login
+
+{
+  "username": " ",
+  "password": " "
+}
