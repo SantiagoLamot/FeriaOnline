@@ -60,4 +60,22 @@ public class JwtService {
                 .getSubject(); // Extrae el sujeto (correo) del token
     }
 
+    public boolean isTokenValid(String token, Usuario usuario) {
+        final String email = extractEmail(token);
+        return (email.equals(usuario.getCorreo()) && !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
+    private Date extractExpiration(String token) {
+        return Jwts.parser()
+                .verifyWith(getSignInKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getExpiration(); // Extrae la fecha de expiración del token
+    }
+
 }
