@@ -51,4 +51,13 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes); // Genera la clave HMAC
     }
 
+    public String extractEmail(String token) {
+        return Jwts.parser()
+                .verifyWith(getSignInKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject(); // Extrae el sujeto (correo) del token
+    }
+
 }

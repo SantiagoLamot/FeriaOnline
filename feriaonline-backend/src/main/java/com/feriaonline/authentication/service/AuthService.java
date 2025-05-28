@@ -100,7 +100,7 @@ public class AuthService {
 
         final String refreshToken = authentication.substring(7);
 
-        final String username = jwtService.extractUsername(refreshToken);
+        final String username = jwtService.extractEmail(refreshToken);
         if (username == null) {
             throw new IllegalArgumentException("Token de autenticación no válido");
         }
