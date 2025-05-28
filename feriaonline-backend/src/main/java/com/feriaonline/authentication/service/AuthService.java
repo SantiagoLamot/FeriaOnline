@@ -100,12 +100,17 @@ public class AuthService {
 
         final String refreshToken = authentication.substring(7);
 
-        final String username = jwtService.extractEmail(refreshToken);
-        if (username == null) {
-            throw new IllegalArgumentException("Token de autenticación no válido");
+        final String email = jwtService.extractEmail(refreshToken);
+        if (email == null) {
+            return null; // O lanzar una excepción si se prefiere
         }
 
-        final Usuario usuario = this.usuarioRepository.findByCorreo(username)
+        final Usuario usuario = this.usuarioRepository.findByCorreo(email)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+
+        final boolean isTokenValid = jwtService.isTokenValid(refreshToken, usuario);
+        if (!isTokenValid) {
+            return null; // O lanzar una excepción si se prefiere
+        }
     }
 }
