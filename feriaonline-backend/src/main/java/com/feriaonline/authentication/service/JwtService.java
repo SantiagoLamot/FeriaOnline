@@ -78,4 +78,13 @@ public class JwtService {
                 .getExpiration(); // Extrae la fecha de expiración del token
     }
 
+    public String extractUsername(String token) {
+        return Jwts.parser() // Crea el parser
+                .verifyWith(getSignInKey()) // Verifica usando la clave secreta
+                .build()
+                .parseSignedClaims(token) // Parsea y valida el JWT
+                .getPayload()
+                .getSubject(); // El "subject" es el email del usuario en este caso
+    }
+
 }

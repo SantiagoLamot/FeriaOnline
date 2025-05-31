@@ -15,8 +15,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll() // permite registrar y loguear sin auth
-                .anyRequest().permitAll()
-                //En un futuro cambiar por .anyRequest().authenticated()
+                .anyRequest().authenticated()
             );
         return http.build();
     }
