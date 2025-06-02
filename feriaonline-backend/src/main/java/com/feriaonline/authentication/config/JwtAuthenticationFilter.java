@@ -1,4 +1,4 @@
-package com.feriaonline.config;
+package com.feriaonline.authentication.config;
 
 import java.io.IOException;
 import java.util.Optional;
