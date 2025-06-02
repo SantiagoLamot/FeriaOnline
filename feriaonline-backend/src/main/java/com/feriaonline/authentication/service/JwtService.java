@@ -39,7 +39,7 @@ public class JwtService {
         return Jwts
                 .builder()
                 .claims(Map.of("nombre", user.getNombre()))
-                .subject(user.getCorreo())
+                .subject(user.getNombreDeUsuario())
                 .issuedAt(new Date(System.currentTimeMillis())) // Fecha de emisión
                 .expiration(new Date(System.currentTimeMillis() + expiration)) // Fecha de expiración
                 .signWith(getSignInKey()) // Firma el token con la clave secreta
@@ -63,6 +63,10 @@ public class JwtService {
     public boolean isTokenValid(String token, Usuario usuario) {
         final String email = extractEmail(token);
         return (email.equals(usuario.getCorreo()) && !isTokenExpired(token));
+    }
+    public boolean isTokenValidUserName(String token, Usuario usuario) {
+        final String username = extractEmail(token);
+        return (username.equals(usuario.getNombreDeUsuario()) && !isTokenExpired(token));
     }
 
     private boolean isTokenExpired(String token) {

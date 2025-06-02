@@ -24,5 +24,4 @@ public class PublicacionController {
     public List<PublicacionDTO> ObtenerTodasLasPublicaciones() {
         return publicacionService.obtenerTodasLasPublicaciones();
     }
-    
 }
