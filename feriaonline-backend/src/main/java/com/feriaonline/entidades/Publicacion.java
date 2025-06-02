@@ -51,7 +51,8 @@ public class Publicacion {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario_vendedor", nullable = false)
     private Usuario usuarioVendedor;
-
+    
+    @Builder.Default
     @OneToMany(mappedBy = "publicacion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ImagenPublicacion> imagenes = new ArrayList<>();
 }
