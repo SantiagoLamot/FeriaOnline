@@ -6,9 +6,12 @@ import java.util.Map;
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.feriaonline.entidades.Usuario;
+import com.feriaonline.repository.UsuarioRepository;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -24,6 +27,12 @@ public class JwtService {
 
     @Value("${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
+
+    private UsuarioRepository usuarioRepository;
+
+    public JwtService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
     public String generateToken(final Usuario user) {
         return buildToken(user, jwtExpiration);
@@ -89,6 +98,12 @@ public class JwtService {
                 .parseSignedClaims(token) // Parsea y valida el JWT
                 .getPayload()
                 .getSubject(); // El "subject" es el email del usuario en este caso
+    }
+
+    public int obtenerIdUsuarioAutenticado() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int userId = (int) auth.getPrincipal();
+        return userId;
     }
 
 }

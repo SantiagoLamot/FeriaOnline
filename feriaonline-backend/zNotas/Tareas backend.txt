@@ -6,12 +6,7 @@ Realizar inserts para probar la visualizacion/funcionalidad de la pagina.
 
 	***Primero***
     Funcion          Entidad
-- Registrar usuario (Usuario) Facu
-- Iniciar sesion    (Usuario) Facu
-- Guardar sesion    (Usuario) Facu
-- Mostrar productos (Publicacion)  Santi
-- Ordenar productos (Publicacion)  Santi
-- Cargar venta      (Publicacion)  Santi
+- Cargar venta      (Publicacion)  Facu
 	
 	***Segundo***
     Funcion          Entidad
