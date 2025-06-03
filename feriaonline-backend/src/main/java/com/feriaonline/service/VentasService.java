@@ -30,7 +30,7 @@ public class VentasService {
                 // Buscar entidades relacionadas a la transaccion
                 Publicacion publicacion = publicacionRepository.findById(compraDTO.publicacionId())
                                 .orElseThrow(() -> new RuntimeException("Publicación no encontrada"));
-
+                System.out.println("ID del comprador recibido: " + compraDTO.compradorId());
                 Usuario comprador = usuarioRepository.findById(compraDTO.compradorId())
                                 .orElseThrow(() -> new RuntimeException("Comprador no encontrado"));
 
@@ -57,12 +57,7 @@ public class VentasService {
                                 .fecha(compraDTO.fecha() != null ? compraDTO.fecha() : LocalDateTime.now())
                                 .build();
 
-                System.out.println("Comprador: " + comprador);
-                System.out.println("Vendedor: " + vendedor);
-                System.out.println("Publicación: " + publicacion);
-                System.out.println("Estado de la transacción: " + estado);
-                System.out.println("Fecha de la transacción: " + transaccion.getFecha());
-
+                System.out.println("metodo de pago: " + compraDTO.metodoDePago());
                 transaccionRepository.save(transaccion);
         }
 

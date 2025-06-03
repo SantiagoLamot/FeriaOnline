@@ -36,15 +36,15 @@ public class Transaccion {
     private Publicacion publicacion;
 
     @ManyToOne
-    @JoinColumn(name = "ID_UsuarioComprador", nullable = false)
+    @JoinColumn(name = "id_usuario_comprador", nullable = false)
     private Usuario comprador;
 
     // Nuevo campo para el usuario vendedor
     @ManyToOne
-    @JoinColumn(name = "ID_UsuarioVendedor", nullable = false)
+    @JoinColumn(name = "id_usuario_vendedor", nullable = false)
     private Usuario vendedor;
 
-    @Column(name = "MetodoDePago", nullable = false, length = 50)
+    @Column(name = "metodo_de_pago", nullable = false, length = 50)
     private String metodoDePago;
 
     @Column(name = "Fecha", nullable = false)
