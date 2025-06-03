@@ -14,6 +14,7 @@ import com.feriaonline.authentication.repository.Token;
 import com.feriaonline.authentication.repository.TokenRepository;
 import com.feriaonline.entidades.Usuario;
 import com.feriaonline.repository.UsuarioRepository;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 
@@ -82,7 +83,7 @@ public class AuthService {
     }
 
     private void revocarTokenUsuario(Usuario usuario){
-        final List<Token> tokenValidos = tokenRepository.findByIsExpiredFalseOrIsRevokedFalseAndUsuario(usuario);
+        final List<Token> tokenValidos = tokenRepository.findByUsuarioAndIsExpiredFalseAndIsRevokedFalse(usuario);
         if(!tokenValidos.isEmpty()){
             for(Token t : tokenValidos){
                 t.setIsExpired(true);

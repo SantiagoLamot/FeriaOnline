@@ -9,6 +9,6 @@ import com.feriaonline.entidades.Usuario;
 
 public interface TokenRepository extends JpaRepository<Token, Integer>  {
 
-    List<Token> findByIsExpiredFalseOrIsRevokedFalseAndUsuario(Usuario usuario);
+    List<Token> findByUsuarioAndIsExpiredFalseAndIsRevokedFalse(Usuario usuario);
     Optional<Token> findByToken(String token);
 }
