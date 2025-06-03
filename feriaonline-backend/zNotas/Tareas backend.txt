@@ -12,7 +12,6 @@ Realizar inserts para probar la visualizacion/funcionalidad de la pagina.
     Funcion          Entidad
 - Mi perfil         (Usuario) Facu
 - Editar mi perfil  (Usuario) Facu 
-- Mis publicaciones (Publicacion) Santi
 - Mis ventas        (Transaccion) Santi
 - Mis compras       (Transaccion) Santi
 
