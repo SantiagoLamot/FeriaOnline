@@ -1,5 +1,7 @@
 package com.feriaonline.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,37 +17,53 @@ import com.feriaonline.repository.UsuarioRepository;
 @Service
 public class VentasService {
 
-    @Autowired
-    private TransaccionRepository transaccionRepository;
+        @Autowired
+        private TransaccionRepository transaccionRepository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+        @Autowired
+        private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private PublicacionRepository publicacionRepository;
+        @Autowired
+        private PublicacionRepository publicacionRepository;
 
-    public void realizarCompra(TransaccionRequest compraDTO) {
-        //Buscar entidades relacionadas a la transaccion
-        Publicacion publicacion = publicacionRepository.findById(compraDTO.publicacionId())
-                .orElseThrow(() -> new RuntimeException("Publicación no encontrada"));
+        public void realizarCompra(TransaccionRequest compraDTO) {
+                // Buscar entidades relacionadas a la transaccion
+                Publicacion publicacion = publicacionRepository.findById(compraDTO.publicacionId())
+                                .orElseThrow(() -> new RuntimeException("Publicación no encontrada"));
 
-        Usuario comprador = usuarioRepository.findById(compraDTO.compradorId())
-                .orElseThrow(() -> new RuntimeException("Comprador no encontrado"));
+                Usuario comprador = usuarioRepository.findById(compraDTO.compradorId())
+                                .orElseThrow(() -> new RuntimeException("Comprador no encontrado"));
 
-        Usuario vendedor = usuarioRepository.findById(compraDTO.vendedorId())
-                .orElseThrow(() -> new RuntimeException("Vendedor no encontrado"));
+                Usuario vendedor = usuarioRepository.findById(compraDTO.vendedorId())
+                                .orElseThrow(() -> new RuntimeException("Vendedor no encontrado"));
 
-        EstadoTransaccion estado = EstadoTransaccion.valueOf(compraDTO.estado());
+                if (compraDTO.estado() == null) {
+                        throw new IllegalArgumentException("El estado no puede ser null");
+                }
 
-        Transaccion transaccion = Transaccion.builder() // HAY QUE AGREGAR MONTO
-                .publicacion(publicacion)
-                .comprador(comprador)
-                .vendedor(vendedor)
-                .metodoDePago(compraDTO.metodoDePago())
-                .estado(estado) 
-                .build();
+                EstadoTransaccion estado;
+                try {
+                        estado = EstadoTransaccion.valueOf(compraDTO.estado());
+                } catch (IllegalArgumentException e) {
+                        throw new RuntimeException("Estado de transacción inválido: " + compraDTO.estado());
+                }
 
-        transaccionRepository.save(transaccion);
-    }
-    
+                Transaccion transaccion = Transaccion.builder()
+                                .publicacion(publicacion)
+                                .comprador(comprador)
+                                .vendedor(vendedor)
+                                .metodoDePago(compraDTO.metodoDePago())
+                                .estado(estado)
+                                .fecha(compraDTO.fecha() != null ? compraDTO.fecha() : LocalDateTime.now())
+                                .build();
+
+                System.out.println("Comprador: " + comprador);
+                System.out.println("Vendedor: " + vendedor);
+                System.out.println("Publicación: " + publicacion);
+                System.out.println("Estado de la transacción: " + estado);
+                System.out.println("Fecha de la transacción: " + transaccion.getFecha());
+
+                transaccionRepository.save(transaccion);
+        }
+
 }
