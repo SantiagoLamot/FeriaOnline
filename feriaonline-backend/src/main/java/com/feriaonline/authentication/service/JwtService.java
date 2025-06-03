@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.feriaonline.entidades.Usuario;
-import com.feriaonline.repository.UsuarioRepository;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -27,12 +26,6 @@ public class JwtService {
 
     @Value("${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
-
-    private UsuarioRepository usuarioRepository;
-
-    public JwtService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
 
     public String generateToken(final Usuario user) {
         return buildToken(user, jwtExpiration);
