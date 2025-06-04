@@ -31,4 +31,29 @@ public class UsuarioService {
 
         return dto;
     }
+
+    public UsuarioPerfilDTO editarPerfil(UsuarioPerfilDTO dto) {
+        int idUsuario = jwtService.obtenerIdUsuarioAutenticado();
+
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            
+        //usuario.setNombreDeUsuario(dto.getNombreDeUsuario());
+        usuario.setNombre(dto.getNombre());
+        usuario.setApellido(dto.getApellido());
+        usuario.setCorreo(dto.getCorreo());
+        usuario.setFotoDePerfil(dto.getFotoDePerfil());
+
+        usuarioRepository.save(usuario);
+
+        UsuarioPerfilDTO perfilActualizado = new UsuarioPerfilDTO();
+        perfilActualizado.setId(usuario.getId());
+        perfilActualizado.setNombreDeUsuario(usuario.getNombreDeUsuario());
+        perfilActualizado.setCorreo(usuario.getCorreo());
+        perfilActualizado.setNombre(usuario.getNombre());
+        perfilActualizado.setApellido(usuario.getApellido());
+        perfilActualizado.setFotoDePerfil(usuario.getFotoDePerfil());
+        
+        return perfilActualizado;
+    }
 }
