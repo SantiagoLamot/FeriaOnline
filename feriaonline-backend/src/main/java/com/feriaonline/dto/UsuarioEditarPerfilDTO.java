@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class UsuarioEditarPerfilDTO {
+    private String nombreDeUsuario;
     private String nombre;
     private String apellido;
     private String correo;
