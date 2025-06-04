@@ -19,7 +19,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Transacciones_tb")
+@Table(name = "transacciones_tb")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,11 +28,11 @@ public class Transaccion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Orden")
+    @Column(name = "id_orden")
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Publicacion", nullable = false)
+    @JoinColumn(name = "id_publicacion", nullable = false)
     private Publicacion publicacion;
 
     @ManyToOne
@@ -47,11 +47,11 @@ public class Transaccion {
     @Column(name = "metodo_de_pago", nullable = false, length = 50)
     private String metodoDePago;
 
-    @Column(name = "Fecha", nullable = false)
+    @Column(name = "fecha", nullable = false)
     private LocalDateTime fecha;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "Estado", nullable = false)
+    @Column(name = "estado", nullable = false)
     private EstadoTransaccion estado;
 
     @PrePersist
