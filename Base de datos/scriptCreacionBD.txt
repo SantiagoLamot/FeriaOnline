@@ -11,34 +11,34 @@ CREATE TABLE usuarios_tb (
     foto_de_perfil TEXT
 );
 
-CREATE TABLE Publicaciones_tb (
-    ID_Publicacion INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE publicaciones_tb (
+    id_publicacion INT AUTO_INCREMENT PRIMARY KEY,
     nombre_producto VARCHAR(100) NOT NULL,
-    Descripcion TEXT,
-    Precio DECIMAL(10,2) NOT NULL,
-    Estado ENUM('Activo', 'Inactivo') NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10,2) NOT NULL,
+    estado ENUM('Activo', 'Inactivo') NOT NULL,
     id_usuario_vendedor INT NOT NULL,
     FOREIGN KEY (id_usuario_vendedor) REFERENCES usuarios_tb(id_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE imagenes_por_publicacion_tb (
-    ID_Imagenes INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Publicacion INT NOT NULL,
-    Imagen TEXT NOT NULL,
-    FOREIGN KEY (ID_Publicacion) REFERENCES Publicaciones_tb(ID_Publicacion) ON DELETE CASCADE
+    id_imagenes INT AUTO_INCREMENT PRIMARY KEY,
+    id_publicacion INT NOT NULL,
+    imagen TEXT NOT NULL,
+    FOREIGN KEY (id_Publicacion) REFERENCES publicaciones_tb(id_publicacion) ON DELETE CASCADE
 );
 
-CREATE TABLE Transacciones_tb (
-    ID_Orden INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Publicacion INT NOT NULL,
+CREATE TABLE transacciones_tb (
+    id_orden INT AUTO_INCREMENT PRIMARY KEY,
+    id_publicacion INT NOT NULL,
     id_usuario_comprador INT NOT NULL,
     id_usuario_vendedor INT NOT NULL,
     metodo_de_pago VARCHAR(50) NOT NULL,
-    Fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Estado ENUM('Pendiente', 'Completado', 'Cancelado') NOT NULL,
-    FOREIGN KEY (ID_Publicacion) REFERENCES Publicaciones_tb(ID_Publicacion) ON DELETE CASCADE,
-    FOREIGN KEY (ID_UsuarioComprador) REFERENCES usuarios_tb(id_usuario) ON DELETE CASCADE,
-    FOREIGN KEY (ID_UsuarioVendedor) REFERENCES usuarios_tb(id_usuario) ON DELETE CASCADE
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    estado ENUM('Pendiente', 'Completado', 'Cancelado') NOT NULL,
+    FOREIGN KEY (id_publicacion) REFERENCES publicaciones_tb(id_publicacion) ON DELETE CASCADE,
+    FOREIGN KEY (id_usuario_comprador) REFERENCES usuarios_tb(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_usuario_vendedor) REFERENCES usuarios_tb(id_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE tokens_tb (
