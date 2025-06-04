@@ -1,7 +1,7 @@
 package com.feriaonline.service;
 import org.springframework.stereotype.Service;
-
-import com.feriaonline.authentication.controller.RegisterRequest;
+import com.feriaonline.authentication.service.JwtService;
+import com.feriaonline.dto.UsuarioPerfilDTO;
 import com.feriaonline.entidades.Usuario;
 import com.feriaonline.repository.UsuarioRepository;
 
@@ -13,24 +13,22 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Usuario registrarUsuario(RegisterRequest request) {
+    @Autowired
+    private JwtService jwtService;
 
-        if(usuarioRepository.findByNombreDeUsuario(request.nombreDeUsuario()).isPresent()) {
-            throw new IllegalArgumentException("El nombre de usuario ya esta en uso");
-        }
+    public UsuarioPerfilDTO miPerfil() {
+        int idUsuario = jwtService.obtenerIdUsuarioAutenticado();
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        
+        UsuarioPerfilDTO dto = new UsuarioPerfilDTO();
+        dto.setId(usuario.getId());
+        dto.setNombreDeUsuario(usuario.getNombreDeUsuario());
+        dto.setCorreo(usuario.getCorreo());
+        dto.setNombre(usuario.getNombre());
+        dto.setApellido(usuario.getApellido());
+        dto.setFotoDePerfil(usuario.getFotoDePerfil());
 
-        if(usuarioRepository.findByCorreo(request.correo()).isPresent()) {
-            throw new IllegalArgumentException("El correo ya esta en uso");
-        }
-
-        Usuario nuevoUsuario = new Usuario();
-        nuevoUsuario.setNombreDeUsuario(request.nombreDeUsuario()); 
-        nuevoUsuario.setCorreo(request.correo()); 
-        nuevoUsuario.setContrasena(request.contrasena());
-        nuevoUsuario.setNombre(request.nombre());
-        nuevoUsuario.setApellido(request.apellido());
-        nuevoUsuario.setFotoDePerfil(null); //A futuro poner una imagen por defecto
-
-        return usuarioRepository.save(nuevoUsuario);
+        return dto;
     }
 }
