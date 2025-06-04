@@ -23,7 +23,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Publicaciones_tb")
+@Table(name = "publicaciones_tb")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,20 +32,20 @@ public class Publicacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Publicacion")
+    @Column(name = "id_publicacion")
     private Integer id;
 
     @Column(name = "nombre_producto", nullable = false, length = 100)
     private String nombreProducto;
 
-    @Column(name = "Descripcion", columnDefinition = "TEXT")
+    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
-    @Column(name = "Precio", nullable = false, precision = 10, scale = 2)
+    @Column(name = "precio", nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "Estado", nullable = false)
+    @Column(name = "estado", nullable = false)
     private EstadoPublicacion estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
