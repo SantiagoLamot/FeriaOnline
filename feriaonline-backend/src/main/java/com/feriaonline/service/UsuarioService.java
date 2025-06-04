@@ -1,6 +1,7 @@
 package com.feriaonline.service;
 import org.springframework.stereotype.Service;
 import com.feriaonline.authentication.service.JwtService;
+import com.feriaonline.dto.UsuarioEditarPerfilDTO;
 import com.feriaonline.dto.UsuarioPerfilDTO;
 import com.feriaonline.entidades.Usuario;
 import com.feriaonline.repository.UsuarioRepository;
@@ -32,7 +33,7 @@ public class UsuarioService {
         return dto;
     }
 
-    public UsuarioPerfilDTO editarPerfil(UsuarioPerfilDTO dto) {
+    public UsuarioPerfilDTO editarPerfil(UsuarioEditarPerfilDTO dto) {
         int idUsuario = jwtService.obtenerIdUsuarioAutenticado();
 
         Usuario usuario = usuarioRepository.findById(idUsuario)
@@ -53,7 +54,7 @@ public class UsuarioService {
         perfilActualizado.setNombre(usuario.getNombre());
         perfilActualizado.setApellido(usuario.getApellido());
         perfilActualizado.setFotoDePerfil(usuario.getFotoDePerfil());
-        
+
         return perfilActualizado;
     }
 }

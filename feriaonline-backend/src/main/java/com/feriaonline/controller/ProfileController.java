@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.feriaonline.dto.UsuarioEditarPerfilDTO;
 import com.feriaonline.dto.UsuarioPerfilDTO;
 import com.feriaonline.entidadesDTO.PublicacionDTO;
 import com.feriaonline.service.PublicacionService;
@@ -35,7 +36,7 @@ public class ProfileController {
     }
 
     @PutMapping("/editarperfil")
-    public UsuarioPerfilDTO editarPerfil(@RequestBody UsuarioPerfilDTO dto) {
+    public UsuarioPerfilDTO editarPerfil(@RequestBody UsuarioEditarPerfilDTO dto) {
         return usuarioService.editarPerfil(dto);
     }
 }
