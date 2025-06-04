@@ -24,10 +24,10 @@ public class ImagenPublicacion {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Imagenes")
+    @Column(name = "id_imagenes")
     private Integer id;
 
-    @Column(name = "Imagen", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "imagen", nullable = false, columnDefinition = "TEXT")
     private String url;
 
     //El fetch = FetchType.LAZY evita traer la publicación completa cuando solo 
