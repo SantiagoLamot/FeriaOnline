@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.feriaonline.dto.UsuarioEditarPerfilDTO;
 import com.feriaonline.dto.UsuarioPerfilDTO;
 import com.feriaonline.entidadesDTO.PublicacionDTO;
+import com.feriaonline.entidadesDTO.TransaccionDTO;
 import com.feriaonline.service.PublicacionService;
 import com.feriaonline.service.UsuarioService;
+import com.feriaonline.service.VentasService;
 
 
 @RestController
@@ -21,6 +23,7 @@ import com.feriaonline.service.UsuarioService;
 public class ProfileController {
     @Autowired
     private PublicacionService publicacionService;
+    private VentasService ventasService;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -40,7 +43,7 @@ public class ProfileController {
         return usuarioService.editarPerfil(dto);
     }
     @GetMapping("/ventas")
-    public List<PublicacionDTO> misVentas(){
-        return publicacionService.misVentas();
+    public List<TransaccionDTO> misVentas(){
+        return ventasService.misVentas();
     }
 }
