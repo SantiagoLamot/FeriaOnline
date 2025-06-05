@@ -23,6 +23,8 @@ import com.feriaonline.service.VentasService;
 public class ProfileController {
     @Autowired
     private PublicacionService publicacionService;
+    
+    @Autowired
     private VentasService ventasService;
 
     @Autowired
