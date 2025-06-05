@@ -2,14 +2,6 @@
 
 USE Feria_Online_Tpq_DB;
 
--- Insertar datos en usuarios
-INSERT INTO usuarios_tb (nombre_de_usuario, correo, contrasena, nombre, apellido, foto_de_perfil) VALUES
-('juanito99', 'juanito99@email.com', 'hashed_pw1', 'Juan', 'Pérez', 'https://randomuser.me/api/portraits/men/32.jpg'),
-('maria23', 'maria23@email.com', 'hashed_pw2', 'María', 'López', 'https://randomuser.me/api/portraits/women/44.jpg'),
-('carlosX', 'carlosx@email.com', 'hashed_pw3', 'Carlos', 'Ramírez', 'https://randomuser.me/api/portraits/men/18.jpg'),
-('ana_dev', 'ana.dev@email.com', 'hashed_pw4', 'Ana', 'Martínez', 'https://randomuser.me/api/portraits/women/55.jpg'),
-('sofia_mkt', 'sofia@email.com', 'hashed_pw5', 'Sofía', 'García', 'https://randomuser.me/api/portraits/women/68.jpg');
-
 -- Insertar datos en publicaciones
 INSERT INTO publicaciones_tb (nombre_producto, Descripcion, Precio, Estado, id_usuario_vendedor) VALUES
 ('Camiseta Vintage', 'Camiseta de los 90s en buen estado', 25.99, 'Activo', 1),
