@@ -69,7 +69,7 @@ public class VentasService {
         }
 
         public List<TransaccionDTO> misVentas() {
-                return transaccionRepository.findByUsuarioVendedor_Id(jwtService.obtenerIdUsuarioAutenticado())
+                return transaccionRepository.findByVendedor_Id(jwtService.obtenerIdUsuarioAutenticado())
                         .stream()
                         .map(TransaccionDTO::new)
                         .collect(Collectors.toList());
