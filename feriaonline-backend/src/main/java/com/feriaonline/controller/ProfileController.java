@@ -39,4 +39,8 @@ public class ProfileController {
     public UsuarioPerfilDTO editarPerfil(@RequestBody UsuarioEditarPerfilDTO dto) {
         return usuarioService.editarPerfil(dto);
     }
+    @GetMapping("/ventas")
+    public List<PublicacionDTO> misVentas(){
+        return publicacionService.misVentas();
+    }
 }
