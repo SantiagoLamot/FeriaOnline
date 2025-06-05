@@ -1,15 +1,19 @@
 package com.feriaonline.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.feriaonline.authentication.service.JwtService;
 import com.feriaonline.dto.TransaccionRequest;
 import com.feriaonline.entidades.EstadoTransaccion;
 import com.feriaonline.entidades.Publicacion;
 import com.feriaonline.entidades.Transaccion;
 import com.feriaonline.entidades.Usuario;
+import com.feriaonline.entidadesDTO.TransaccionDTO;
 import com.feriaonline.repository.PublicacionRepository;
 import com.feriaonline.repository.TransaccionRepository;
 import com.feriaonline.repository.UsuarioRepository;
@@ -25,6 +29,9 @@ public class VentasService {
 
         @Autowired
         private PublicacionRepository publicacionRepository;
+
+        @Autowired
+        private JwtService jwtService;
 
         public void realizarCompra(TransaccionRequest compraDTO) {
                 // Buscar entidades relacionadas a la transaccion
@@ -59,6 +66,13 @@ public class VentasService {
 
                 System.out.println("metodo de pago: " + compraDTO.metodoDePago());
                 transaccionRepository.save(transaccion);
+        }
+
+        public List<TransaccionDTO> misVentas() {
+                return transaccionRepository.findByUsuarioVendedor_Id(jwtService.obtenerIdUsuarioAutenticado())
+                        .stream()
+                        .map(TransaccionDTO::new)
+                        .collect(Collectors.toList());
         }
 
 }
