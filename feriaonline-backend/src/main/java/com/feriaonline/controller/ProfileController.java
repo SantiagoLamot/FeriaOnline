@@ -48,4 +48,8 @@ public class ProfileController {
     public List<TransaccionDTO> misVentas(){
         return ventasService.misVentas();
     }
+    @GetMapping("/compras")
+    public List<TransaccionDTO> misCompras(){
+        return ventasService.misCompras();
+    }
 }
