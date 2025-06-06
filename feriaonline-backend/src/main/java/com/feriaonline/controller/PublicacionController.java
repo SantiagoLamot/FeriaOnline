@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import com.feriaonline.dto.PublicacionRequestDTO;
 import com.feriaonline.entidadesDTO.PublicacionDTO;
 import com.feriaonline.service.PublicacionService;
 
@@ -23,5 +25,10 @@ public class PublicacionController {
     @GetMapping()
     public List<PublicacionDTO> ObtenerTodasLasPublicaciones() {
         return publicacionService.obtenerTodasLasPublicaciones();
+    }
+
+    @PostMapping
+    public PublicacionDTO crearPublicacion(@RequestBody PublicacionRequestDTO dto) {
+        return publicacionService.crearPublicacion(dto);
     }
 }
