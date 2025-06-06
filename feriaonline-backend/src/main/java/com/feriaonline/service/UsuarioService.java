@@ -58,7 +58,6 @@ public class UsuarioService {
 
         usuario.setNombre(dto.getNombre());
         usuario.setApellido(dto.getApellido());
-        usuario.setCorreo(dto.getCorreo());
         usuario.setFotoDePerfil(dto.getFotoDePerfil());
 
         usuarioRepository.save(usuario);
