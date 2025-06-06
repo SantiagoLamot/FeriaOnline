@@ -75,4 +75,11 @@ public class VentasService {
                         .collect(Collectors.toList());
         }
 
+        public List<TransaccionDTO> misCompras() {
+            return transaccionRepository.findByComprador_Id(jwtService.obtenerIdUsuarioAutenticado())
+                .stream()
+                .map(TransaccionDTO::new)
+                .collect(Collectors.toList());
+        }
+
 }
