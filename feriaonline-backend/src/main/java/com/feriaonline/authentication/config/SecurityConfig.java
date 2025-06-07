@@ -57,7 +57,7 @@ public class SecurityConfig {
         }
         final String jwt = token.substring(7);
         final Token foundToken = tokenRepository.findByTokenAndIsRevokedFalseAndIsExpiredFalse(jwt)
-            .orElseThrow(()->new IllegalArgumentException("Token Invalido"));
+            .orElseThrow(()->new IllegalArgumentException("Token invalido, revocado, o expirado"));
         foundToken.setIsExpired(true);
         foundToken.setIsRevoked(true);
         tokenRepository.save(foundToken);
