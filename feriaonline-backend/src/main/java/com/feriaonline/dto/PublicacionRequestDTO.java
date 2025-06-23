@@ -1,9 +1,10 @@
 package com.feriaonline.dto;
 
-import lombok.Data;
 import java.math.BigDecimal;
-import java.util.List;
+
 import com.feriaonline.entidades.EstadoPublicacion;
+
+import lombok.Data;
 
 @Data
 public class PublicacionRequestDTO {
@@ -11,5 +12,4 @@ public class PublicacionRequestDTO {
     private String descripcion;
     private BigDecimal precio;
     private EstadoPublicacion estado;
-    private List<String> imagenesBase64; // o urls, depende de cómo las manejes
 }
