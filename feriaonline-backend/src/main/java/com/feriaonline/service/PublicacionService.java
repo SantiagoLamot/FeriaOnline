@@ -125,4 +125,38 @@ public class PublicacionService {
             throw new RuntimeException("Error al borrar el archivo del servidor", e);
         }
     }
+
+    public void cargarImagenes(PublicacionDTO dto, List<MultipartFile> imagenes) {
+        Publicacion publicacion = publicacionRepository.findById(dto.getId())
+            .orElseThrow(()-> new RuntimeException("Error al obtener publicacion"));
+
+        int idUsuarioVendedor = jwtService.obtenerIdUsuarioAutenticado();
+
+        if(publicacion.getId()!=idUsuarioVendedor){
+            new RuntimeException("No posee permisos para agregar esta imagen");
+            return;
+        }
+
+        for (MultipartFile file : imagenes) {
+            if (!file.isEmpty()) {
+                try {
+                    String extension = Objects.requireNonNull(file.getOriginalFilename())
+                            .substring(file.getOriginalFilename().lastIndexOf("."));
+                    String fileName = UUID.randomUUID().toString() + extension;
+                    Path filePath = Paths.get(uploadDir, fileName);
+                    Files.createDirectories(filePath.getParent());
+                    Files.write(filePath, file.getBytes());
+                    
+                    ImagenPublicacion imagen = new ImagenPublicacion();
+                    imagen.setUrl("/uploads/" + fileName);
+                    imagen.setPublicacion(publicacion);
+                    imagenRepository.save(imagen);
+
+                } catch (Exception e) {
+                    throw new RuntimeException("Error al guardar imagen", e);
+                }
+            }
+        }
+
+    }
 }
