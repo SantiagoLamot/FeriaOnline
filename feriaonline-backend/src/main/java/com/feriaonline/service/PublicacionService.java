@@ -81,8 +81,7 @@ public class PublicacionService {
                     Path filePath = Paths.get(uploadDir, fileName);
                     Files.createDirectories(filePath.getParent());
                     Files.write(filePath, file.getBytes());
-                    System.out.println("RUTA :" + filePath);
-
+                    
                     ImagenPublicacion imagen = new ImagenPublicacion();
                     imagen.setUrl("/uploads/" + fileName);
                     imagen.setPublicacion(guardada);
