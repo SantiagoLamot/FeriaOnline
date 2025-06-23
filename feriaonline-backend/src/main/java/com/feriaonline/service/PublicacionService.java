@@ -116,7 +116,6 @@ public class PublicacionService {
         try {
             // Eliminar el archivo del disco si existe
             Files.deleteIfExists(filePath);
-            System.out.println("Archivo eliminado: " + filePath);
 
             // Eliminar el registro de la base de datos
             imagenRepository.deleteById(imagen.getId());
@@ -133,10 +132,8 @@ public class PublicacionService {
         int idUsuarioVendedor = jwtService.obtenerIdUsuarioAutenticado();
 
         if(publicacion.getId()!=idUsuarioVendedor){
-            new RuntimeException("No posee permisos para agregar esta imagen");
-            return;
+            throw new RuntimeException("No posee permisos para agregar esta imagen");
         }
-
         for (MultipartFile file : imagenes) {
             if (!file.isEmpty()) {
                 try {
@@ -157,6 +154,5 @@ public class PublicacionService {
                 }
             }
         }
-
     }
 }
