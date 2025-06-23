@@ -1,5 +1,6 @@
 package com.feriaonline.service;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,6 +20,7 @@ import com.feriaonline.entidades.EstadoPublicacion;
 import com.feriaonline.entidades.ImagenPublicacion;
 import com.feriaonline.entidades.Publicacion;
 import com.feriaonline.entidades.Usuario;
+import com.feriaonline.entidadesDTO.ImagenPublicacionDTO;
 import com.feriaonline.entidadesDTO.PublicacionDTO;
 import com.feriaonline.repository.ImagenRepository;
 import com.feriaonline.repository.PublicacionRepository;
@@ -79,7 +81,7 @@ public class PublicacionService {
                     Path filePath = Paths.get(uploadDir, fileName);
                     Files.createDirectories(filePath.getParent());
                     Files.write(filePath, file.getBytes());
-                    System.out.println("RUTA :"+ filePath);
+                    System.out.println("RUTA :" + filePath);
 
                     ImagenPublicacion imagen = new ImagenPublicacion();
                     imagen.setUrl("/uploads/" + fileName);
@@ -92,6 +94,36 @@ public class PublicacionService {
             }
         }
         return new PublicacionDTO(guardada);
+    }
 
+    public void eliminarImagen(ImagenPublicacionDTO dto) {
+        int userId = jwtService.obtenerIdUsuarioAutenticado();
+
+        ImagenPublicacion imagen = imagenRepository.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Imagen no encontrada"));
+
+        Publicacion publicacion = imagen.getPublicacion();
+        Usuario usuario = publicacion.getUsuarioVendedor();
+
+        // Validar que el usuario autenticado es el vendedor de la publicacion a la que corresp la img
+        if (usuario == null || usuario.getId() != userId) {
+            throw new RuntimeException("No tenés permiso para eliminar esta imagen");
+        }
+
+        // Obtener el nombre físico del archivo desde la URL
+        String fileName = Paths.get(imagen.getUrl()).getFileName().toString();
+        Path filePath = Paths.get(uploadDir, fileName);
+
+        try {
+            // Eliminar el archivo del disco si existe
+            Files.deleteIfExists(filePath);
+            System.out.println("Archivo eliminado: " + filePath);
+
+            // Eliminar el registro de la base de datos
+            imagenRepository.deleteById(imagen.getId());
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error al borrar el archivo del servidor", e);
+        }
     }
 }
