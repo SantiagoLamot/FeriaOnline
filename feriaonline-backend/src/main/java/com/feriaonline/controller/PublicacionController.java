@@ -3,6 +3,7 @@ package com.feriaonline.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,4 +45,17 @@ public class PublicacionController {
         publicacionService.eliminarImagen(dto);
         return ResponseEntity.ok("Imagen eliminada correctamente");
     }
+
+    @PostMapping(value = "/cargar/imagen", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> cargarImagen(@RequestPart PublicacionDTO dto,
+            @RequestPart("imagenes")List<MultipartFile> imagenes) {
+        try{
+            publicacionService.cargarImagenes(dto, imagenes);
+            return ResponseEntity.ok("Imagens actualizadas correctamente");
+        }
+        catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al cargar imagenes"+e.toString());
+        }
+    }
+    
 }
