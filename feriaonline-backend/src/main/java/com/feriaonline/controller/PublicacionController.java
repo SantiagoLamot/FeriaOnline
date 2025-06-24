@@ -1,6 +1,7 @@
 package com.feriaonline.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,27 +36,41 @@ public class PublicacionController {
     }
 
     @PostMapping(value = "/crear", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public PublicacionDTO crearPublicacion(@RequestPart PublicacionRequestDTO dto,
+    public ResponseEntity<?> crearPublicacion(
+            @RequestPart PublicacionRequestDTO dto,
             @RequestPart("imagenes") List<MultipartFile> imagenes) {
-        return publicacionService.crearPublicacion(dto, imagenes);
+        try {
+            PublicacionDTO creada = publicacionService.crearPublicacion(dto, imagenes);
+            return ResponseEntity.ok(creada);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Datos inválidos");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear publicación");
+        }
     }
 
     @DeleteMapping("/imagen")
-    public ResponseEntity<String> eliminarImagen(@RequestBody ImagenPublicacionDTO dto) {
-        publicacionService.eliminarImagen(dto);
-        return ResponseEntity.ok("Imagen eliminada correctamente");
+    public ResponseEntity<?> eliminarImagen(@RequestBody ImagenPublicacionDTO dto) {
+        try {
+            publicacionService.eliminarImagen(dto);
+            return ResponseEntity.ok("Imagen eliminada correctamente");
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Imagen no encontrada");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar imagen");
+        }
     }
 
     @PostMapping(value = "/cargar/imagen", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> cargarImagen(@RequestPart PublicacionDTO dto,
-            @RequestPart("imagenes")List<MultipartFile> imagenes) {
-        try{
+            @RequestPart("imagenes") List<MultipartFile> imagenes) {
+        try {
             publicacionService.cargarImagenes(dto, imagenes);
             return ResponseEntity.ok("Imagens actualizadas correctamente");
-        }
-        catch(Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al cargar imagenes"+e.toString());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al cargar imagenes" + e.toString());
         }
     }
-    
+
 }
