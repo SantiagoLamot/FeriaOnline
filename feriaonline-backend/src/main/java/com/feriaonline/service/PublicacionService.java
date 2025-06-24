@@ -86,12 +86,12 @@ public class PublicacionService {
                     imagen.setUrl("/uploads/" + fileName);
                     imagen.setPublicacion(guardada);
                     imagenRepository.save(imagen);
-
                 } catch (Exception e) {
                     throw new RuntimeException("Error al guardar imagen", e);
                 }
             }
         }
+        guardada.setImagenes(imagenRepository.findByPublicacion_Id(guardada.getId()));
         return new PublicacionDTO(guardada);
     }
 
